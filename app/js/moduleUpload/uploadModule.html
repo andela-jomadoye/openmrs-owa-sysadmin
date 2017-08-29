@@ -4,7 +4,7 @@
 <div class="container" id="moduleUploadContainer">
     <div class="row">
         <div class="col-md-12 col-xs-12">
-            <h2>Add or Upgrade Module</h2>
+            <h2>Add or Upgrade Module/OWA</h2>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
 -->
     <div style="margin-bottom:15px;" ng-hide="uplodedsuccessMsg && startupsuccessMsg">
         <div class="text-center center-block">
-             <b>Select Module to Upload </b>
+             <b>Select Module/OWA to Upload </b>
         </div>
         <div class="panel-body center-block">
 
@@ -39,9 +39,20 @@
                     <!--</div>-->
 
             <div class="demo-droppable center-block" for="test">
-                <input type="file" fileread="uploadme.src" ngf-select ng-model="myFile" file-model="myFile" name="file" file="file"
-                       accept=".omod" ngf-max-size="10MB" required accept=".omod" onChange="validate(this.value)"
-                       ngf-model-invalid="errorFile" id="module_upload" style="border: 0px;">
+                <input type="file"
+                    fileread="uploadme.src"
+                    ngf-select
+                    ng-model="myFile"
+                    file-model="myFile"
+                    name="file"
+                    file="file"
+                    ngf-max-size="10MB"
+                    required
+                    accept=".zip,.omod"
+                    onChange="validate(this.value)"
+                    ngf-model-invalid="errorFile"
+                    id="module_upload"
+                    style="border: 0px;" />
                 <h1 class="output center-block" id="dragAndDropOutput" style="margin-top: -150px;">Drag files here or click to upload</h1>
             </div>
 
@@ -319,9 +330,9 @@
 
         var ext = file.split(".");
         ext = ext[ext.length-1].toLowerCase();
-        var arrayExtensions = ["omod"];
+        var arrayExtensions = ["omod", "zip"];
 
-        if (arrayExtensions.lastIndexOf(ext) == -1) {
+        if (!arrayExtensions.includes(ext)) {
             $('#invalidFileTypeError').show();
             $("#module_upload").val("");
         }
